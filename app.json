@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "bouzouki-notes",
+    "slug": "bouzouki-notes",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/logo/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alexiosiko.bouzoukinotes"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.alexiosiko.bouzoukinotes"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/logo/favicon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8611763d-9e41-4a85-a57f-43fce0fcb824"
+      }
+    },
+    "owner": "alexiosiko",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8611763d-9e41-4a85-a57f-43fce0fcb824"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+export const colors = {
+	gradient: "#00FF7F",
+    background: "#222",
+    foreground: "#eee",
+	navbackground: "#000",
+	navforegroud: "#fff",
+    primary: "#0B0033",
+    primaryforeground: "#384E77",
+    secondary: "#000",
+    secondaryforeground: "#fff",
+    accent: "#384E77",
+    accentforeground: "#384E77",
+    destructive: "#DB5461",
+    destructiveforeground: "#fff",
+}
