@@ -22,7 +22,7 @@ export default function Piano() {
 	const [selected, setSelected] = useState<string[]>([]);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [highlightedNoteIndex, setHighlightedNoteIndex] = useState<number>(-1);
-	const [showResults, setShowResults] = useState<boolean>(true);
+	const [showResults, setShowResults] = useState<boolean>(false);
 
 	useEffect(() => {
 		getNotes();
@@ -58,9 +58,8 @@ export default function Piano() {
 	return (
 		<View style={[styles.background, { flexDirection: 'column'}]}>
 			<Results showResults={showResults} setShowResults={setShowResults} selected={selected} sources={sources} />
-			<View style={{ height: '40%'}} >
+			<View style={{ height: '40%', justifyContent: 'center' }} >
 				<DropDown setKey={setKey} />
-				{sources.map((source, index) => <Text key={index}>{source.note}</Text>)}
 				<Staff selected={selected} highlightedNoteIndex={highlightedNoteIndex}	 sources={sources}  />
 			</View>
 			<View style={{ width: '100%', justifyContent: 'space-around', paddingBottom: 12, flexDirection: 'row' }}>

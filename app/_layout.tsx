@@ -1,6 +1,3 @@
-import 'react-native-reanimated'
-import 'react-native-gesture-handler'
-
 import { colors } from '@/constants/colors'
 import { Stack } from 'expo-router'
 import React from 'react'
