@@ -18,10 +18,9 @@ export default function Index() {
 		<View style={{ gap: 12, paddingTop: 12, flexDirection: 'column', alignContent: 'center', flexWrap: 'wrap', justifyContent: 'center'}}>
 			<InstrumentItem header='Bouzouki' href='/instruments/bouzouki' />
 			<InstrumentItem header='Piano' href='/instruments/piano' />
-			{/* <InstrumentItem header='Violin' href='/instruments/violin' /> */}
 		</View>
-		<Link href="/piano" style={[styles.button, { marginTop: 24}]}>
-			<Header style={[styles.button, {width: 100, color: colors.secondaryforeground}]}>Piano Playground</Header>
+		<Link href="/playground" style={[styles.button, { marginTop: 24}]}>
+			<Header style={[styles.button, {width: 100, color: colors.secondaryforeground}]}>Playground</Header>
 		</Link>
 	</View>
   )

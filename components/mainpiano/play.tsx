@@ -10,11 +10,10 @@ export default function Play({ sources, setIsPlaying, isPlaying, setHighlightedN
 	isPlaying: boolean,
 }) {
 	async function onPlay() {
-		console.log("her");
 		if (sources == null || isPlaying == true)
 			return;
 		setIsPlaying(true);
-		console.log("her1");
+		console.log("playing");
 		
 		// Stop all current audios
 		for (let i = 0; i < sources.length; i++)

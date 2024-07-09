@@ -4,16 +4,16 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import StaffNote from './staffnote';
 import { Source } from '@/constants/Source';
 
-export default function Staff({ sources, highlightedNoteIndex, selected }: { 
+export default function Staff({ sources, highlightedNoteIndex, selected, onPress }: { 
 	sources?: Source[],
 	highlightedNoteIndex?: number,
 	selected: string[],
+	onPress?: () => void
 }) {	
   return (
-		<View style={{ height: 124, paddingTop: 24 }}>
+		<View style={{ height: 124, paddingTop: 24 }} onTouchStart={onPress}>
 			<View style={{ position: 'absolute', left: 7, top: 28 , zIndex: 10 
 			}}>
-				<FontAwesome6 name="staff-snake" size={64} color='white' />
 			</View>
 			<View style={{ gap: 20, alignItems: 'center' }}> 
 				<View style={[styles.line, { top: 0 * 18 }]} />

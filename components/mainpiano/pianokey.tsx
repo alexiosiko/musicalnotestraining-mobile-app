@@ -46,9 +46,10 @@ export function PianoKey({ position, noteName, notes, setSelected }: {
 		setIsTouching(true);
 		Play();
 		setSelected((prevSelected) => {
-			if (prevSelected.length == 4)
+			if (prevSelected.length === 4)
 				return prevSelected;
-			return [...prevSelected, noteName];
+			else
+				return [...prevSelected, noteName];
 		})
 	}
 

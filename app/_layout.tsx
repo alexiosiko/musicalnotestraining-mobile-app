@@ -15,7 +15,7 @@ export default function _layout() {
 		<Stack.Screen name='index' 					options={{ title: 'Home', headerTitleAlign: 'center' }} />
 		<Stack.Screen name='instruments/bouzouki'  	options={{ title: 'Bouzouki' }} />
 		<Stack.Screen name='instruments/violin' 	options={{ title: 'Violin' }} />
-		<Stack.Screen name='instruments/piano'	 	options={{ title: 'Piano'}} />
+		<Stack.Screen name='playground'	 	options={{ title: 'Playground'}} />
 	</Stack>
 	)
 }

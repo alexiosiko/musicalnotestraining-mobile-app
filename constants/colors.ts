@@ -10,6 +10,6 @@ export const colors = {
     secondaryforeground: "#fff",
     accent: "#384E77",
     accentforeground: "#384E77",
-    destructive: "#DB5461",
+    destructive: "#eB5461",
     destructiveforeground: "#fff",
 }

@@ -3,7 +3,6 @@ import Erase from '@/components/mainpiano/erase';
 import { PianoKey } from '@/components/mainpiano/pianokey';
 import Play from '@/components/mainpiano/play';
 import Results from '@/components/mainpiano/results';
-import Reveal from '@/components/mainpiano/reveal';
 import Staff from '@/components/mainpiano/staff';
 import Text from '@/components/ui/text';
 import { Source } from '@/constants/Source';
@@ -13,6 +12,10 @@ import { getNote, randomSequenceOfArray} from '@/lib/notes';
 import { Audio } from 'expo-av';
 import React, { useEffect, useState } from 'react'
 import { ScrollView, View, } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { fadeSound } from '@/lib/sounds';
+
 
 export default function Piano() {
 	const [key, setKey] = useState<string>("C4");
@@ -53,20 +56,43 @@ export default function Piano() {
 
 	function onReveal() {
 		setShowResults(true);
-		
+	}
+	async function playSequence() {
+		if (isPlaying)
+			return;
+		setIsPlaying(true);
+
+		if (sources == null)
+			return;
+	
+		// Stop all current audios
+		for (let i = 0; i < sources.length; i++)
+			await sources[i].sound.stopAsync()
+
+
+		for (let i = 0; i < sources.length; i++) {
+			const sound = sources[i].sound;
+			await sound.setVolumeAsync(1);
+			await sound.playAsync()
+			await new Promise((resolve) => setTimeout(resolve, 750));
+			fadeSound(sound)
+		}
+		setIsPlaying(false);
 	}
 	return (
 		<View style={[styles.background, { flexDirection: 'column'}]}>
-			<Results showResults={showResults} setShowResults={setShowResults} selected={selected} sources={sources} />
-			<View style={{ height: '40%', justifyContent: 'center' }} >
-				<DropDown setKey={setKey} />
-				<Staff selected={selected} highlightedNoteIndex={highlightedNoteIndex}	 sources={sources}  />
+			{showResults && <Results  setShowResults={setShowResults} selected={selected} sources={sources} />}
+			<View style={{ height: '40%', justifyContent: 'space-around'}} >
+				<Text style={{ marginLeft: 'auto', marginRight: 'auto', fontSize: 24 }}>{key}</Text>
+				{/* <DropDown setKey={setKey} /> */}
+				<Staff onPress={playSequence} selected={selected} highlightedNoteIndex={highlightedNoteIndex}	 sources={sources}  />
 			</View>
 			<View style={{ width: '100%', justifyContent: 'space-around', paddingBottom: 12, flexDirection: 'row' }}>
 				<Erase setSelected={setSelected} />
-				<Play isPlaying={isPlaying} setHighlightedNote={setHighlightedNoteIndex} setIsPlaying={setIsPlaying} sources={sources} />
-				<Reveal onReveal={onReveal} />
-			</View>
+				<Feather name="trash-2" size={34} color="white" />
+				{/* <Play isPlaying={isPlaying} setHighlightedNote={setHighlightedNoteIndex} setIsPlaying={setIsPlaying} sources={sources} /> */}
+				<AntDesign onPress={() => setShowResults(true)} name="checkcircleo" size={34} color="white" />
+				</View>
 			<ScrollView contentOffset={{ x: 0, y: 20 }} horizontal={true} >
 			{/* <PianoKey setSelected={setSelected} notes={notes} noteName='C1'/>
 				<PianoKey setSelected={setSelected} notes={notes} noteName='C#1' position={0} />

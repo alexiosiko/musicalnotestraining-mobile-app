@@ -12,9 +12,9 @@ export default function Erase({ setSelected }: {
 			return newSelected;
 		})
 	}
-  return (
-	<View onTouchStart={onErase}>
-		<FontAwesome5 name="backspace" size={34} color="white" />
-	</View>
-)
+	return (
+		<View onTouchStart={onErase}>
+			<FontAwesome5 name="undo" size={32} color="white" />
+		</View>
+	)
 }
