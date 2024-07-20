@@ -8,9 +8,10 @@ import Header from '../ui/header'
 import Button from '../ui/button1'
 import { styles } from '@/constants/styles'
 
-export default function Results({ sources, selected, setShowResults }: {
+export default function Results({ sources, selected, setShowResults, newBoard }: {
 	sources: Source[],
 	selected: string[],
+	newBoard: () => void,
 	setShowResults: React.Dispatch<React.SetStateAction<boolean>>
 }) {
 	const sourcesToStrings = (): string[] => {
@@ -19,8 +20,8 @@ export default function Results({ sources, selected, setShowResults }: {
 		return strings;
 	}
 	const handleOnContinue = () => {
+		newBoard();
 		setShowResults(false)
-		sources = [];
 	}
 	const isWin = (): boolean => {
 		if (selected.length != sources.length)

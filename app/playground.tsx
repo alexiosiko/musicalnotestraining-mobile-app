@@ -40,14 +40,20 @@ export default function Piano() {
 		setNotes(notes);
 	}
 
+	const newBoard = () => {
+		getRandomSequence();
+		setSelected([]);
+		setHighlightedNoteIndex(-1);
+	}
+
 	function getRandomSequence() {
 		const randNumArray: number[] = randomSequenceOfArray(scale, 4);
 		let sources: Source[] = [];
-		randNumArray.forEach(randNum => {
+		randNumArray.forEach(async randNum => {
 			const sound = new Audio.Sound;
 			const note = getNote(key, randNum);
 			const audioFile = pianoMap.get(note);
-			sound.loadAsync(audioFile)
+			await sound.loadAsync(audioFile)
 			const source = new Source(sound, 0.5, note);
 			sources.push(source);
 		})
@@ -61,9 +67,10 @@ export default function Piano() {
 		if (isPlaying)
 			return;
 		setIsPlaying(true);
-
+		
 		if (sources == null)
 			return;
+
 	
 		// Stop all current audios
 		for (let i = 0; i < sources.length; i++)
@@ -71,28 +78,29 @@ export default function Piano() {
 
 
 		for (let i = 0; i < sources.length; i++) {
+			setHighlightedNoteIndex(i);
 			const sound = sources[i].sound;
 			await sound.setVolumeAsync(1);
 			await sound.playAsync()
-			await new Promise((resolve) => setTimeout(resolve, 750));
+			await new Promise((resolve) => setTimeout(resolve, 500));
 			fadeSound(sound)
 		}
 		setIsPlaying(false);
+		setHighlightedNoteIndex(-1);
 	}
 	return (
 		<View style={[styles.background, { flexDirection: 'column'}]}>
-			{showResults && <Results  setShowResults={setShowResults} selected={selected} sources={sources} />}
+			{showResults && <Results setShowResults={setShowResults} selected={selected} sources={sources} newBoard={newBoard} />}
 			<View style={{ height: '40%', justifyContent: 'space-around'}} >
-				<Text style={{ marginLeft: 'auto', marginRight: 'auto', fontSize: 24 }}>{key}</Text>
+				<Text style={{ marginLeft: 'auto', marginRight: 'auto', fontSize: 24 }}>{key} Major</Text>
 				{/* <DropDown setKey={setKey} /> */}
 				<Staff onPress={playSequence} selected={selected} highlightedNoteIndex={highlightedNoteIndex}	 sources={sources}  />
 			</View>
 			<View style={{ width: '100%', justifyContent: 'space-around', paddingBottom: 12, flexDirection: 'row' }}>
 				<Erase setSelected={setSelected} />
-				<Feather name="trash-2" size={34} color="white" />
-				{/* <Play isPlaying={isPlaying} setHighlightedNote={setHighlightedNoteIndex} setIsPlaying={setIsPlaying} sources={sources} /> */}
+				<Feather onPress={() => setSelected([])} name="trash-2" size={34} color="white" />
 				<AntDesign onPress={() => setShowResults(true)} name="checkcircleo" size={34} color="white" />
-				</View>
+			</View>
 			<ScrollView contentOffset={{ x: 0, y: 20 }} horizontal={true} >
 			{/* <PianoKey setSelected={setSelected} notes={notes} noteName='C1'/>
 				<PianoKey setSelected={setSelected} notes={notes} noteName='C#1' position={0} />
